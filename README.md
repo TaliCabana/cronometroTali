@@ -30,7 +30,7 @@ Mirá la demo del proyecto [aquí](https://cronometrotali.netlify.app/) 👀
 ## Cómo ejecutar el proyecto 💻
 
 1. Cloná el repositorio escribiendo en una terminal el siguiente comando:  
-   `git clone https://github.com/TaliCabana/cronometro.git`
+   `git clone https://github.com/TaliCabana/cronometroTali.git`
 
 2. Luego abrí el archivo `index.html` en tu navegador preferido
 
