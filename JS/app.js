@@ -1,67 +1,46 @@
-// 6- Realizar una web con un temporizador donde el usuario pueda ingresar un tiempo desde donde comenzará a decrementar el contador. Debe contener los botones, iniciar, pausar y reset. 
+// 5- Realizar una web con un cronómetro, que tenga las opciones de iniciar, reset (volver el cronómetro a 0) y pausar.gast
 
-// Obtener elementos del DOM
-const inputTiempo = document.getElementById("inputTiempo");
-const btnIniciar = document.getElementById("btnIniciar");
-const btnPausar = document.getElementById("btnPausar");
-const btnReset = document.getElementById("btnReset");
+// Variables de control
+let segundos = 0;
+let intervalo = null;
 
-// Variables de control (manejan el estado interno del programa):
-let tiempoRestante = 0; // guarda cuántos segundos le quedan al temporizador. Va disminuyendo de uno en uno cada segundo
-let intervalo = null; // guarda el identificador devuelto por setInterval. Esto permite detener el temporizador después con clearInterval
-
-// Función para actualizar el input con el tiempo restante
+// Mostrar tiempo en formato hh:mm:ss
 function mostrarTiempo() {
-  inputTiempo.value = tiempoRestante;
+  const horas = String(Math.floor(segundos / 3600)).padStart(2, "0");
+  const minutos = String(Math.floor((segundos % 3600) / 60)).padStart(2, "0");
+  const seg = String(segundos % 60).padStart(2, "0");
+
+  document.getElementById("cronometro").textContent = `${horas}:${minutos}:${seg}`;
 }
 
-// Función para iniciar el temporizador:
-function iniciarTemporizador(e) {
-  e.preventDefault(); // para evitar que se recargue el formulario
-
-  // si ya hay un intervalo activo, no creamos otro
-  if (intervalo !== null) return;
-
-  // si ya hay un tiempo cargado previamente (desde pausa). sigo desde ahí
-  if (tiempoRestante <= 0) {
-    const valorInput = parseInt(inputTiempo.value);
-
-    if (isNaN(valorInput) || valorInput <= 0) {
-      alert("⚠ Ingresá un tiempo válido en segundos.");
-    }
-    tiempoRestante = valorInput;
+// Función para iniciar el cronómetro
+function iniciarCronometro() {
+  if (intervalo === null) {
+    intervalo = setInterval(() => {
+      segundos++;
+      mostrarTiempo();
+    }, 1000);
   }
-  intervalo = setInterval(()=>{
-    tiempoRestante--;
-    mostrarTiempo();
-
-    if(tiempoRestante <= 0){
-        clearInterval(intervalo);
-        intervalo = null;
-        alert("⏰ ¡Tiempo finalizado!")
-    }
-  }, 1000) // Ejecuta la función cada 1000 milisegundos (c/1seg)
 }
 
-// Función para PAUSAR el temporizador
-function pausarTemporizador(e){
-    e.preventDefault();
-
-    clearInterval(intervalo);
-    intervalo = null;
+// Función para pausar el cronómetro
+function pausarCronometro() {
+  clearInterval(intervalo);
+  intervalo = null;
 }
 
-// Función para RESETEAR el temporizador:
-function resetearTemporizador(e){
-    e.preventDefault();
-
-    clearInterval(intervalo)
-    intervalo=null;
-    tiempoRestante=0;
-    mostrarTiempo();
+// Función para resetear el cronómetro
+function resetearCronometro() {
+  clearInterval(intervalo);
+  intervalo = null;
+  segundos = 0;
+  mostrarTiempo();
 }
 
-// Eventos:
-btnIniciar.addEventListener("click",iniciarTemporizador);
-btnPausar.addEventListener("click", pausarTemporizador);
-btnReset.addEventListener("click", resetearTemporizador);
+// Eventos
+document.getElementById("btnIniciar").addEventListener("click", iniciarCronometro);
+document.getElementById("btnPausar").addEventListener("click", pausarCronometro);
+document.getElementById("btnReset").addEventListener("click", resetearCronometro);
+
+// Mostrar 00:00:00 al cargar
+mostrarTiempo();
