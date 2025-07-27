@@ -2,13 +2,10 @@
 
 Este proyecto es una **aplicación web interactiva** que simula un **cronómetro** digital con funciones para **iniciar**, **pausar** y **resetear** el conteo.
 
----
-
 ## 🚀 Demo del proyecto
 
-Mirá la demo del proyecto [aquí]() 👀
+Mirá la demo del proyecto [aquí](https://cronometrotali.netlify.app/) 👀
 
----
 
 ## 🖥️ Tecnologías Utilizadas
 
@@ -19,7 +16,6 @@ Mirá la demo del proyecto [aquí]() 👀
 | 🌐 Bootstrap 5 | Layout responsive y clases utilitarias |
 | ⚙️ JavaScript | Lógica de conteo y manipulación del DOM |
 
----
 
 ## 🧠 Contenidos Aplicados
 
@@ -30,8 +26,6 @@ Mirá la demo del proyecto [aquí]() 👀
   - Eventos (`addEventListener`)
   - Manipulación del DOM
   - Funciones de control para tiempo
-
----
 
 ## Cómo ejecutar el proyecto 💻
 
